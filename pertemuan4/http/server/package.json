@@ -1,0 +1,16 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ahmad Syangkan Syarip",
+  "license": "ISC",
+  "description": "Direktory untuk belajar http server",
+  "dependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

@@ -1,0 +1,5 @@
+Untuk menjalankan node.js, inisialisasi terlebih dahulu dengan menjalankan perintah npm init -y di dalam direktori
+
+
+Default project node.js adalah common.js
+Jika ingin mengganti pake metode import export, maka di dalam package.json tambahkan "type" : "module"

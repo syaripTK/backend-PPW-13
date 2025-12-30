@@ -1,0 +1,12 @@
+{
+  "name": "readline-tugas-kelompok",
+  "version": "1.1.0",
+  "main": "view/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Ahmad Syangkan Syarip",
+  "license": "ISC",
+  "description": ""
+}
