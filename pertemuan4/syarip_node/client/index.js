@@ -8,12 +8,12 @@ const clientRequest = http.request("http://localhost:3000/data", (res) => {
 
   res.on("end", () => {
     const result = JSON.parse(data);
-    console.log(result.data);
+    console.info(result.data);
   });
 });
 
 clientRequest.on("error", (err) => {
-  console.log(err.message);
+  console.error(err.message);
 });
 
 clientRequest.end();

@@ -1,8 +1,8 @@
 import http from "http";
 
 const server = http.createServer((req, res) => {
-  console.log(req.url);
-  console.log(res.statusCode);
+  console.info(req.url);
+  console.info(res.statusCode);
   const { url, method } = req;
   res.setHeader("Content-Type", "application/JSON");
 
@@ -26,5 +26,5 @@ const server = http.createServer((req, res) => {
 
 const PORT = 3000;
 server.listen(PORT, () => {
-  console.log(`Server berjalan di port ${PORT}`);
+  console.info(`Server berjalan di port ${PORT}`);
 });
