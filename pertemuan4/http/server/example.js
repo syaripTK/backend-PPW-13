@@ -8,6 +8,10 @@ const server = http.createServer((req, res) => {
   const { url, method } = req;
   //   Kirim data ke client
   res.setHeader("Content-Type", "application/JSON");
+  /**
+   * or
+   * res.writeHead(200, {"Content-Type", "text/plain"})
+   */
 
   if (url === "/data" && method === "GET") {
     res.statusCode = 200;
@@ -25,15 +29,14 @@ const server = http.createServer((req, res) => {
   } else if (url === "/json" && method === "GET") {
     res.statusCode = 200;
     let users = [];
-    users.push(
-      { name: "Ahmad", Umur: 32 },
-      { name: "Pragos", Umur: 22 },
+    users.push({ name: "Ahmad", Umur: 32 }, { name: "Pragos", Umur: 22 });
+    res.end(
+      JSON.stringify({
+        success: true,
+        message: "Data dari server",
+        data: users,
+      })
     );
-    res.end(JSON.stringify({
-      success: true,
-      message: "Data dari server",
-      data : users
-    }));
   } else {
     res.statusCode = 404;
     res.end("Route tidak ditemukan");
