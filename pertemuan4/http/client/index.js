@@ -25,13 +25,13 @@ const request = http.request(
      * data yang di dapat melalui event "data" itu sebenarnya masih dalam bentuk potongan /
      * chunk, oleh karena itu perlu digabungkan secara manual agar datanya menjadi utuh
      */
-    let data = "";
+    let item = "";
     res.on("data", (chunk) => {
-      data += chunk;
+      item += chunk;
     });
     // Jika datanya diterima, maka jalankan event end
     res.on("end", () => {
-      const result = JSON.parse(data);
+      const result = JSON.parse(item);
       console.log(typeof result);
     });
   }
