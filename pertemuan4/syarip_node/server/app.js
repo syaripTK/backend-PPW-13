@@ -13,11 +13,14 @@ const server = http.createServer((req, res) => {
       { id: 2, nama_jurusan: "PPM" },
       { id: 3, nama_jurusan: "PSJ" },
     ];
-    res.end(JSON.stringify({
-      success: true,
-      message: "Data from server",
-      data: kelas,
-    }));
+
+    res.end(
+      JSON.stringify({
+        success: true,
+        message: "Data from server",
+        data: kelas,
+      })
+    );
   } else {
     res.statusCode = 404;
     res.end("Route tidak ditemukan");
