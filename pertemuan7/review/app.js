@@ -1,6 +1,5 @@
 import express from "express";
 import data from "./models/data.js";
-import e from "express";
 const app = express();
 
 //Ini wajib ada jika mau menerima kiriman data dalam bentuk json dari client
@@ -56,8 +55,10 @@ app.post("/santri", (req, res) => {
 
   const databaru = { id: data.length + 1, nama, nilai };
 
+  if (!nilai || !nama) {
+    return res.status(500).json({ message: "Request body harus diisi" });
+  }
   data.push(databaru);
-
   console.log(data);
   res
     .status(201)
@@ -67,6 +68,11 @@ app.post("/santri", (req, res) => {
 app.delete("/santri/:id", (req, res) => {
   const { id } = req.params;
   const index = data.findIndex((e) => (e.id = Number(id)));
+
+  if ((index = -1)) {
+    return res.status(404).json({ message: "Id santri tidak ditemukan" });
+  }
+
   data.splice(index, 1);
   res.status(200).json({ message: "Data berhasil dihapus", data: data });
 });
@@ -74,6 +80,11 @@ app.delete("/santri/:id", (req, res) => {
 app.put("/santri/:id", (req, res) => {
   const { id } = req.params;
   const { nama, nilai } = req.body;
+  /**
+   * findIndex() digunakan untuk mencari posisi object,
+   * berbeda dengan find() yang mereturn sebuah object secara utuh, yang direturn oleh findIndex adalah index arraynya
+   * jika tidak ditemukan, maka findIndex akan mereturn nilai -1
+   */
 
   const index = data.findIndex((e) => e.id === Number(id));
 
@@ -94,4 +105,5 @@ app.listen(3000, () => {
  * Tugas (Deadline pukul 8)
  * 1. Tambahkan fitur untuk update data
  * 2. Buat dokumentasi API - (Link pengumpulan berbentuk URL)
+ *    link dokumentasi di file link.txt
  */
