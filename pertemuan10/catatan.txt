@@ -1,0 +1,20 @@
+#Middleware
+
+Ketika membuat middleware itu wajib menyertakan setidaknya 3 parameter
+1. request
+2. response
+3. next
+
+Middleware sangat berguna untuk menangani berbagai tugas seperti autentikasi, logging, dan validasi
+
+Ketika kita membuat sebuah program yang mempunyai konsep Router, maka router ini sangat membutuhkan terhadap middleware
+
+Web request -> Middleware1 next() -> Middleware2 next -> Router
+
+Jika kita membuat 2 middleware, maka middleware pertama untuk autentikasi, dan middleware kedua untuk validasi. 
+
+Macam-macam middleware:
+1. Middleware aplication level
+2. Route level middleware
+3. Build-in middleware
+4. Custom middleware
