@@ -9,8 +9,13 @@ const app = express();
  * bisa menggunakan middleware app.use()
  */
 
-app.use("/api/v1/buah", routerBuah);
+//Ini aplication level middleware
+app.use((req, res, next) => {
+  console.info("Ini dari middleware yang pertama", req.url, new Date());
+  next();
+});
 
+app.use("/api/v1/buah", routerBuah);
 
 // app.get("/buah", getData);
 app.listen(5000, () => {

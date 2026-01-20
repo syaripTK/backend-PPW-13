@@ -1,0 +1,85 @@
+#Query SQL yang potensial muncul
+
+1. Select all data
+SELECT * FROM users;
+
+2. Select data by id (params)
+SELECT * FROM users WHERE id_user = ?;
+
+3. Update data
+UPDATE users
+SET username = ?, email = ?, status = ?
+WHERE id_user = ?;
+
+4. Insert data
+INSERT INTO users (username, email, status)
+VALUES (?, ?, ?);
+
+5. Delete data
+DELETE FROM users WHERE id_user = ?;
+
+6. Order by
+SELECT * FROM produk ORDER BY created_at DESC;
+
+7. Filter data (where)
+SELECT * FROM produk WHERE stok > 10;
+
+8. Filter + Order by 
+SELECT * FROM produk
+WHERE harga > 100000
+ORDER BY harga ASC;
+
+9. Limit data
+SELECT * FROM produk
+ORDER BY created_at DESC
+LIMIT 5;
+
+10. Search (like)
+SELECT * FROM produk
+WHERE nama_produk LIKE '%rak%';
+
+11. Count (hitung aggregat)
+SELECT COUNT(*) AS total_user FROM users;
+
+12. Join (tampilkan order beserta nama user)
+SELECT users.username, orders.total_harga
+FROM orders
+JOIN users ON users.id_user = orders.user_id;
+
+PATTERN BACA SOAL
+
+| Kata di Soal   | SQL                        |
+| -------------- | -------------------------- |
+| berdasarkan ID | `WHERE id = ?`             |
+| terbaru        | `ORDER BY created_at DESC` |
+| terlama        | `ORDER BY created_at ASC`  |
+| lebih dari     | `>`                        |
+| kurang dari    | `<`                        |
+| mengandung     | `LIKE '%keyword%'`         |
+| jumlah         | `COUNT()`                  |
+| hapus          | `DELETE`                   |
+
+=================
+# Kode Regex
+=================
+
+const idRegex = /^[0-9]+$/;
+
+const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+const statusRegex = /^(active|inactive)$/;
+
+const numberRegex = /^[0-9]+$/;
+
+const productNameRegex = /^[a-zA-Z0-9\s]{3,50}$/;
+
+const searchRegex = /^[a-zA-Z0-9\s]+$/;
+
+const phoneRegex = /^08[0-9]{8,11}$/;
+
+const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
+

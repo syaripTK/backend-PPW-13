@@ -13,14 +13,14 @@ const getAllEvent = (req, res) => {
 const createNewEvent = (req, res) => {
   const { nama_acara, tanggal, kuota, peserta = [] } = req.body;
 
-  if (!nama_acara || !tanggal || kuota == null) {
-    return respond(
-      res,
-      400,
-      "error",
-      "Nama, Tanggal, Kuota tidak boleh kosong"
-    );
-  }
+  // if (!nama_acara || !tanggal || kuota == null) {
+  //   return respond(
+  //     res,
+  //     400,
+  //     "error",
+  //     "Nama, Tanggal, Kuota tidak boleh kosong"
+  //   );
+  // }
 
   const newEvent = {
     id: acara.length + 1,
