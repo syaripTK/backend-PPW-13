@@ -83,3 +83,39 @@ const phoneRegex = /^08[0-9]{8,11}$/;
 
 const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
 
+================
+SEQUELIZE CLI
+================
+
+1. Project bootstraping
+Ini buat ngeinisialisasi dependensinya
+   ---npx sequelize-cli init---
+   kode ini akan secara otomatis menggenerate 4 folder utama kita (models, migrations, config, seeders)
+   - models
+   folder yang berhubungan dengan semua program (Representasi JavaScript)
+   - migrations
+   adalah folder yang menyimpan perubahan dalam database
+
+   "MODELS dan MIGRATIONS adalah 2 file yang selalu berhubungan"
+
+Ini buat ngecreate table
+npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string,email:string
+
+Ini buat ngeeksekusi migrasi
+npx sequelize-cli db:migrate
+
+Ini buat nge-undo
+npx sequelize-cli db:migrate:undo
+
+2. Jika ingin menambahkan collumn baru maka harus membuat folder baru dengan sintaks seperti di bawah
+    -- npx sequelize-cli migration-generate --name nama-kolom --
+  Jangan lupa ganti createTable di fungsi up dengan addColumn,
+  dan ganti dropTable dengan removeColumn.
+
+
+
+=================
+SEQUELIZERC
+=================
+
+adalah tools untuk sequelize-cli menentukan folder menjadi lebih fleksible, tida melulu harus 4 folder bawaan (models, migrations, config, seeders) , atau sederhananya SQLZRC ini adalah konfigurasi sqlz-cli

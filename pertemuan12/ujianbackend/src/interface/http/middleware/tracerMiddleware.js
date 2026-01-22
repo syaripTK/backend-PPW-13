@@ -14,7 +14,7 @@ const checkId = async (req, res, next) => {
 
 const validateInsertBody = (req, res, next) => {
   if (!req.body) {
-    return responError(res, 400, "Req body harus diisi!");
+    return responError(res, 400, "error", "Req body harus diisi!");
   }
   const { nama_barang, lokasi, deskripsi, status, kontak_pelapor } = req.body;
   if (!nama_barang || !lokasi || !deskripsi || !status || !kontak_pelapor) {
@@ -22,7 +22,7 @@ const validateInsertBody = (req, res, next) => {
       res,
       400,
       "error",
-      "Nama barang, lokasi, deskripsi, status, kontak pelapor wajib diisi"
+      "Nama barang, lokasi, deskripsi, status, kontak pelapor wajib diisi",
     );
   }
   next();
@@ -35,7 +35,7 @@ const validateVarchar = (req, res, next) => {
       res,
       400,
       "error",
-      "Maaf, data nama barang terlalu panjang. Maksimal 50 karakter"
+      "Maaf, data nama barang terlalu panjang. Maksimal 50 karakter",
     );
   }
   next();
@@ -51,7 +51,7 @@ const duplicateName = async (req, res, next) => {
       res,
       409,
       "error",
-      "Nama barang sudah ada, silahkan gunakan yang lain"
+      "Nama barang sudah ada, silahkan gunakan yang lain",
     );
   }
   next();
@@ -66,7 +66,7 @@ const duplicateUpdate = async (req, res, next) => {
       res,
       409,
       "error",
-      `Nama barang (${nama_barang}) sudah digunakan oleh data lain`
+      `Nama barang (${nama_barang}) sudah digunakan oleh data lain`,
     );
   }
 
@@ -98,7 +98,7 @@ const validateSort = (req, res, next) => {
       res,
       400,
       "error",
-      "Order hanya boleh diisi dengan DESC atau ASC"
+      "Order hanya boleh diisi dengan DESC atau ASC",
     );
   }
 
