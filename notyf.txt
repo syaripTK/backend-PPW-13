@@ -100,7 +100,7 @@ Ini buat ngeinisialisasi dependensinya
    maka models tidak akan bisa dibuat tanpa migrations, tapi migations bias tanpa models.
 
 Ini buat ngecreate table
-npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string
+    ---npx sequelize-cli model:generate --name User --attributes firstName:string,lastName:string---
 
 Ini buat ngeeksekusi migrasi
   ---npx sequelize-cli db:migrate---
@@ -119,4 +119,136 @@ Ini buat nge-undo
 SEQUELIZERC
 =================
 
-adalah tools untuk sequelize-cli menentukan folder menjadi lebih fleksible, tida melulu harus 4 folder bawaan (models, migrations, config, seeders) , atau sederhananya SQLZRC ini adalah konfigurasi sqlz-cli
+adalah tools untuk sequelize-cli menentukan folder menjadi lebih fleksible, tidak melulu harus 4 folder bawaan (models, migrations, config, seeders) , atau sederhananya SQLZRC ini adalah konfigurasi sqlz-cli
+Sintaks dasarnya:
+
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("src/config/database.json"),
+  "models-path": path.resolve("src/db/models"),
+  "migrations-path": path.resolve("src/db/migrations"),
+  "seeders-path": path.resolve("src/db/seeders"),
+};
+
+===================================
+RELASI (hasOne, hasMany, belongsTo)
+===================================
+noted: atur erlasi di models sebelum terjun ke coding
+
+-Belongs To 
+  Peserta.belongsTo(Jurusan, {
+  foreignKey: "jurusanId",
+  as: "jurusan",
+  });
+
+-Has Many 
+  Jurusan.hasMany(Peserta, {
+  foreignKey: "jurusanId",
+  as: "peserta",
+  });
+
+-Include (JOIN)
+  include: [
+  {
+    model: Jurusan,
+    as: "jurusan",
+    attributes: ["nama_jurusan"],
+  },
+  ]
+
+
+==========================  
+MOST USED SEQUELIZE SYNTAX
+==========================
+
+1. CRUD dasar
+---------------
+  .create() 
+  .findAll()
+  .findOne({where: {idPeserta : 1}})
+  .update({ status: "active" }, { where: { id_peserta: 1 } });
+  .destroy({where: { id_peserta: 1 },});
+
+2 Where Operator
+----------------
+*noted: sebelum menggunakan operator, lakukan dulu import { Op } dari sequelize /
+
+  -and 
+  where: {status: "active",jurusanId: 1,}
+
+  -or
+  where: {
+  [Op.or]: [
+    { status: "active" },
+    { status: "inactive" },
+  ],
+  }
+
+  -like
+  where: {
+  nama_peserta: {
+    [Op.like]: "%bud%",
+  },
+  }
+
+  -in 
+  where: {
+  jurusanId: {
+    [Op.in]: [1, 2, 3],
+  },
+  }
+
+3. Select Column (agar response lebih bersih)
+---------------------------------------------
+  - EXCLUDE createdAt & updatedAt
+  attributes: {
+  exclude: ["createdAt", "updatedAt"],
+  }
+
+  - PILIH KOLOM
+  attributes: ["id_peserta", "nama_peserta"]
+
+4. Aggregation (Statistik)
+--------------------------
+- Count
+  attributes: [
+  "jurusanId",
+  [Sequelize.fn("COUNT", Sequelize.col("id_peserta")), "total"],
+  ],
+  group: ["jurusanId"]
+
+- Count + Join
+  Jurusan.findAll({
+  attributes: [
+    "nama_jurusan",
+    [Sequelize.fn("COUNT", Sequelize.col("peserta.id_peserta")), "total_peserta"],
+  ],
+  include: [{ model: Peserta, as: "peserta", attributes: [] }],
+  group: ["Jurusan.id_jurusan"],
+  });
+
+
+5. Pagination
+--------------
+  const limit = 10;
+  const offset = (page - 1) * limit;
+
+  await Peserta.findAll({
+  limit,
+  offset,
+  });
+
+===============
+MULTER
+===============
+
+Noted:
+-Batasi extensi file
+-Batasi ukuran file
+
+=============
+DOTENV
+=============
+
+Untuk mengamankan case sensitive yang berkaitan dengan database 

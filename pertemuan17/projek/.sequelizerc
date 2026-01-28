@@ -1,0 +1,8 @@
+const path = require("path");
+
+module.exports = {
+  config: path.resolve("src/infrastructure/config/database.js"),
+  "models-path": path.resolve("src/interface/db/models"),
+  "migrations-path": path.resolve("src/interface/db/migrations"),
+  "seeders-path": path.resolve("src/interface/db/seeders"),
+};
